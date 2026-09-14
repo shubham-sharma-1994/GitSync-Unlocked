@@ -1,0 +1,166 @@
+name: Build APK
+
+# On-demand / per-commit builds that produce installable APKs as workflow
+# artifacts. Unlike generate-apk-release.yml (which only runs on version
+# tags and publishes a signed GitHub Release), this works with zero
+# configuration: if the real signing secrets aren't set up yet it signs
+# with a key generated just for that run, so you can grab an APK the first
+# time you run this without setting anything up.
+#
+# Once RELEASE_KEYSTORE_BASE64 / RELEASE_SIGNING_ALIAS /
+# RELEASE_SIGNING_PASSWORD are configured (the same secrets
+# generate-apk-release.yml uses), this workflow automatically switches to
+# signing with that key instead, so on-demand builds carry the same
+# signature as tagged releases and can be installed over one another.
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: build-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+
+      - uses: actions/checkout@v7
+
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock', 'rust/.cargo/config.toml') }}
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: 1.88.0
+
+      - name: Create secrets.dart
+        env:
+          OAUTH_SECRETS: ${{ secrets.SECRETS }}
+        run: |
+          if [ -n "$OAUTH_SECRETS" ]; then
+            printf '%s\n' "$OAUTH_SECRETS" > ./lib/constant/secrets.dart
+          else
+            cp lib/constant/secrets.dart.template lib/constant/secrets.dart
+            sed -i 's#const oauthRedirectUrl = "";#const oauthRedirectUrl = "gitsync://auth";#' lib/constant/secrets.dart
+            echo "::notice::No SECRETS repository secret configured, so this build has no OAuth client IDs — GitHub/GitLab/Gitea sign-in via OAuth won't work, but HTTPS Basic and SSH auth still do. See the README's 'OAuth secrets' section to configure real client IDs."
+          fi
+
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v4
+        with:
+          channel: stable
+          version: 3.35.2
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: "temurin"
+          java-version: "21"
+          cache: "gradle"
+
+      - name: Install flutter_rust_bridge_codegen
+        run: cargo install flutter_rust_bridge_codegen --version 2.12.0 --locked
+
+      - name: Install cargo-expand
+        run: cargo install cargo-expand --version 1.0.121 --locked
+
+      - name: Get Packages
+        run: flutter pub get
+
+      - name: Generate Rust
+        run: |
+          flutter_rust_bridge_codegen generate
+          git checkout HEAD -- rust/src/frb_generated.rs
+
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r29-beta4
+
+      - uses: SimonMarquis/android-accept-licenses@v1
+
+      - name: Build Release APKs
+        run: |
+          export CARGO_ENCODED_RUSTFLAGS=$(printf '%s\x1f%s\x1f%s' "--remap-path-prefix=$HOME/.cargo/registry/src=/cargo/registry/src" "--remap-path-prefix=$GITHUB_WORKSPACE=." "-Ccodegen-units=1")
+          export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
+          flutter build apk --release --split-per-abi --target-platform="android-arm"
+          flutter build apk --release --split-per-abi --target-platform="android-arm64"
+          flutter build apk --release --split-per-abi --target-platform="android-x64"
+
+      - name: Prepare signing key
+        id: signing
+        run: |
+          if [ -n "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" ]; then
+            echo "Using the configured RELEASE_KEYSTORE_BASE64 secret."
+            exit 0
+          fi
+
+          keytool -genkeypair -v \
+            -keystore /tmp/ci-generated.keystore \
+            -alias ci-generated \
+            -storepass ci-generated \
+            -keypass ci-generated \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -dname "CN=GitSync Unlocked CI, OU=CI, O=Unofficial Build, L=NA, ST=NA, C=US"
+          echo "keystore_base64=$(base64 -w0 /tmp/ci-generated.keystore)" >> "$GITHUB_OUTPUT"
+          echo "::warning::No RELEASE_KEYSTORE_BASE64 secret configured, so this build is signed with a key generated for this run only. It will install fine, but you won't be able to update over a previous build of this app (from CI or elsewhere) without uninstalling it first. Configure RELEASE_KEYSTORE_BASE64 / RELEASE_SIGNING_ALIAS / RELEASE_SIGNING_PASSWORD for a stable signature across builds."
+
+      - name: Sign App
+        id: sign_app
+        uses: ilharp/sign-android-release@v2
+        with:
+          releaseDir: build/app/outputs/flutter-apk/
+          signingKey: ${{ secrets.RELEASE_KEYSTORE_BASE64 || steps.signing.outputs.keystore_base64 }}
+          keyAlias: ${{ secrets.RELEASE_SIGNING_ALIAS || 'ci-generated' }}
+          keyStorePassword: ${{ secrets.RELEASE_SIGNING_PASSWORD || 'ci-generated' }}
+          keyPassword: ${{ secrets.RELEASE_SIGNING_PASSWORD || 'ci-generated' }}
+          buildToolsVersion: 34.0.0
+
+      - name: Format App List
+        id: signed_file_artifacts
+        run: |
+          {
+            echo "signedFiles<<SIGNED_FILES_EOF_DELIMETER"
+            echo "${{ steps.sign_app.outputs.signedFiles }}" | sed 's/:/\n/g'
+            echo "SIGNED_FILES_EOF_DELIMETER"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v7
+        with:
+          name: gitsync-unlocked-apk-${{ github.run_number }}
+          path: |
+            ${{ steps.signed_file_artifacts.outputs.signedFiles }}
+            !*-release.apk
+          retention-days: 14
+
+      - name: Summary
+        run: |
+          {
+            echo "### APK build complete"
+            echo
+            echo "Download the signed APKs from this run's **Artifacts** section above (retained 14 days)."
+            if [ -z "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" ]; then
+              echo
+              echo "⚠️ Signed with a one-off key generated for this run — see the warning above."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

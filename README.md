@@ -80,7 +80,11 @@ This is an unofficial fork; for issues with building or running this fork specif
 
 ## Build Instructions
 
-This fork isn't distributed as a prebuilt release, so building from source (below) is the only way to run it. If you'd rather just try GitSync without building anything, the [official app](https://github.com/ViscousPot/GitSync#readme) is available on the Play Store, App Store, F-Droid and IzzyOnDroid — note that it still has the premium tier this fork removes.
+This fork isn't distributed as a prebuilt release, so building it is the only way to run it. If you'd rather just try GitSync without building anything, the [official app](https://github.com/ViscousPot/GitSync#readme) is available on the Play Store, App Store, F-Droid and IzzyOnDroid — note that it still has the premium tier this fork removes.
+
+You don't need a local toolchain to get an APK, though — the [**Build APK**](.github/workflows/build-apk.yml) GitHub Actions workflow builds one on every push to `main`, and can also be run on demand from this repo's Actions tab (`Run workflow`). Grab the signed APKs from the finished run's Artifacts section. It works with no configuration, though installs from consecutive runs won't be able to update over each other until you add `RELEASE_KEYSTORE_BASE64`, `RELEASE_SIGNING_ALIAS` and `RELEASE_SIGNING_PASSWORD` repo secrets — the same ones [`generate-apk-release.yml`](.github/workflows/generate-apk-release.yml) uses for tagged releases — at which point it signs with that key instead.
+
+To build locally instead:
 
 GitSync is a Flutter app with a Rust core (via [`flutter_rust_bridge`](https://github.com/fzyzcjy/flutter_rust_bridge)).
 
