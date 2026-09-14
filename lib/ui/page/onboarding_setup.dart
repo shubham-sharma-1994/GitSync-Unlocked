@@ -32,7 +32,6 @@ import 'package:GitSync/ui/dialog/github_scoped_guide.dart' as github_scoped_gui
 import 'package:GitSync/ui/dialog/prominent_disclosure.dart' as ProminentDisclosureDialog;
 import 'package:GitSync/api/logger.dart';
 import 'package:GitSync/ui/page/clone_repo_main.dart';
-import 'package:GitSync/ui/page/unlock_premium.dart';
 
 class RightAngleLinePainter extends CustomPainter {
   final double animationValue;
@@ -1871,25 +1870,17 @@ class _OnboardingSetup extends ConsumerState<OnboardingSetup> with WidgetsBindin
                             ),
                           ),
                         ),
-                        child: Builder(
-                          builder: (context) {
-                            final hasPremium = ref.watch(premiumStatusProvider);
-                            return Text(
-                              (hasPremium == true ? t.continueLabel : t.onboardingPremiumFeatures).toUpperCase(),
-                              style: TextStyle(
-                                color: colours.secondaryDark,
-                                fontWeight: FontWeight.bold,
-                                fontSize: textMD,
-                                fontFamily: "AtkinsonHyperlegible",
-                              ),
-                            );
-                          },
+                        child: Text(
+                          t.continueLabel.toUpperCase(),
+                          style: TextStyle(
+                            color: colours.secondaryDark,
+                            fontWeight: FontWeight.bold,
+                            fontSize: textMD,
+                            fontFamily: "AtkinsonHyperlegible",
+                          ),
                         ),
                         onPressed: () async {
                           await _controller.reverse();
-                          if (context.mounted) {
-                            await Navigator.of(context).push(createUnlockPremiumRoute(context, {"onboarding": true}));
-                          }
                           if (mounted) {
                             await showNotificationsOrNext();
                           }
