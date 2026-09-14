@@ -4,36 +4,25 @@
     src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" width="140" 
   />
 
-  <h3>GitSync</h3>
+  <h3>GitSync Unlocked</h3>
   <h4>Mobile git client for syncing a repository between remote and a local directory</h4>
-  
+
   <p align="center">
-    <a href="#"><img src="https://img.shields.io/github/license/ViscousPot/GitSync?v=1" alt="license"></a>
-    <a href="#"><img src="https://img.shields.io/github/last-commit/ViscousPot/GitSync?v=1" alt="last commit"></a>
-    <a href="#"><img src="https://img.shields.io/github/downloads/ViscousPot/GitSync/total" alt="downloads"></a>
-    <a href="#"><img src="https://img.shields.io/github/stars/ViscousPot/GitSync?v=1" alt="stars"></a>
-    <a href="https://github.com/sponsors/ViscousPot"><img src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86" alt="sponsor"></a>
+    <a href="#"><img src="https://img.shields.io/github/license/shubham-sharma-1994/GitSync-Unlocked?v=1" alt="license"></a>
+    <a href="#"><img src="https://img.shields.io/github/last-commit/shubham-sharma-1994/GitSync-Unlocked?v=1" alt="last commit"></a>
+    <a href="#"><img src="https://img.shields.io/github/stars/shubham-sharma-1994/GitSync-Unlocked?v=1" alt="stars"></a>
+    <a href="https://github.com/sponsors/ViscousPot"><img src="https://img.shields.io/static/v1?label=Sponsor%20the%20original%20dev&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86" alt="sponsor"></a>
   <br>
-    <img alt="2024 Gem of the Year (Obsidian Tools)" src="https://img.shields.io/badge/2024%20Gem%20of%20the%20Year%20(Obsidian%20Tools)-black?style=for-the-badge&logo=obsidian&logoColor=hotpink">
-    &nbsp;&nbsp;
     <a href="https://gitsync.viscouspotenti.al/wiki"><img alt="Wiki" src="https://img.shields.io/badge/wiki-white?style=for-the-badge"></a>
  </p>
- 
-  <p align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.viscouspot.gitsync" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 48px" ></a>  
-  &nbsp;&nbsp;
-  <a href="https://apps.apple.com/us/app/gitsync/id6744980427" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Download_on_the_App_Store_RGB_blk.svg" alt="Get it on Google Play" style="height: 48px" ></a>
-  &nbsp;&nbsp;
-  <a href="https://apt.izzysoft.de/fdroid/index/apk/com.viscouspot.gitsync" target="_blank"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroidButtonGreyBorder_nofont.png" alt="Get it on Izzy On Droid" style="height: 48px" ></a>
-<br>
-      <a href="https://f-droid.org/en/packages/com.viscouspot.gitsync" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Get_it_on_F-Droid_%28material_design%29.svg" alt="Get it on F-Droid" style="height: 48px" ></a> 
-   &nbsp;&nbsp;
-  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22com.viscouspot.gitsync%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2FViscousPot%2FGitSync%22%2C%22author%22%3A%22ViscousPot%22%2C%22name%22%3A%22GitSync%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Afalse%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22filterReleaseTitlesByRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22filterReleaseNotesByRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22sortMethodChoice%5C%22%3A%5C%22date%5C%22%2C%5C%22useLatestAssetDateAsReleaseDate%5C%22%3Afalse%2C%5C%22releaseTitleAsVersion%5C%22%3Afalse%2C%5C%22trackOnly%5C%22%3Afalse%2C%5C%22versionExtractionRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%5C%22%2C%5C%22versionDetection%5C%22%3Atrue%2C%5C%22releaseDateAsVersion%5C%22%3Afalse%2C%5C%22useVersionCodeAsOSVersion%5C%22%3Afalse%2C%5C%22apkFilterRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22invertAPKFilter%5C%22%3Afalse%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22%5C%22%2C%5C%22appAuthor%5C%22%3A%5C%22%5C%22%2C%5C%22shizukuPretendToBeGooglePlay%5C%22%3Afalse%2C%5C%22allowInsecure%5C%22%3Afalse%2C%5C%22exemptFromBackgroundUpdates%5C%22%3Afalse%2C%5C%22skipUpdateNotifications%5C%22%3Afalse%2C%5C%22about%5C%22%3A%5C%22%5C%22%2C%5C%22refreshBeforeDownload%5C%22%3Afalse%2C%5C%22includeZips%5C%22%3Afalse%2C%5C%22zippedApkFilterRegEx%5C%22%3A%5C%22%5C%22%7D%22%2C%22overrideSource%22%3Anull%7D" target="_blank"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/refs/heads/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" style="height: 48px" ></a> 
-  </p>
 
   <br />
 
 </div>
+
+> **This is an unofficial fork of [ViscousPot/GitSync](https://github.com/ViscousPot/GitSync).** The upstream app requires a GitHub-sponsor "Premium" unlock to manage more than one repository container, add discovered submodules automatically, or import a settings backup covering multiple repositories. This fork removes that gate entirely — along with the paywall screen and every button that led to it — so those are available immediately, no sponsorship required. (The premium page also advertised Git LFS, git-crypt filters and pre-commit hooks as upcoming; those were never built in either version, so this fork doesn't change anything there.)
+>
+> This fork is **not published on the Play Store, App Store, F-Droid, or IzzyOnDroid** — those listings are the official app, which still has the premium tier. To get the unlocked build, [build it yourself](#build-instructions) from this repository. It carries the same GPLv3 license as upstream and is not affiliated with or endorsed by the original developer; if you find the underlying app useful, consider supporting them directly via the sponsor link above.
 
 GitSync is a cross-platform git client for Android and iOS that aims to simplify the process of syncing a folder between a git remote and a local directory. It works in the background to keep your files synced with a simple one-time setup and a range of options for activating manual syncs.
 
@@ -72,25 +61,30 @@ GitSync is a cross-platform git client for Android and iOS that aims to simplify
   - Agent that can run repo actions for you
   - Separate model selection for chat, tools and the wand
   - A global toggle to hide all AI features
-- Manage multiple repositories with containers
+- **Manage unlimited repositories with containers** (no cap — upstream limits non-sponsors to one)
 - Repository settings
   - Signed commits
   - Customisable sync commit messages
   - Author details
   - Edit `.gitignore` and `.git/info/exclude`
   - Disable SSL verification per repo
+- **No sponsor unlock required** for any of the above, including managing more than one repository container
 
 More information can be found at the [wiki](https://gitsync.viscouspotenti.al/wiki)
 <br>
-Give us a ⭐ if you like our work. Much appreciated!
+If you find this fork useful, a ⭐ here is appreciated — and if you like GitSync itself, consider starring [the original project](https://github.com/ViscousPot/GitSync) too.
 
 ## Support
 
-For support, email bugs.viscouspotential@gmail.com or create an issue in this repository.
+This is an unofficial fork; for issues with building or running this fork specifically, open an issue in this repository. For bugs in the underlying GitSync app itself, email bugs.viscouspotential@gmail.com or use the [upstream repository](https://github.com/ViscousPot/GitSync).
 
 ## Build Instructions
 
-If you just want to try the app out, feel free to download a release from an official platform!
+This fork isn't distributed as a prebuilt release, so building it is the only way to run it. If you'd rather just try GitSync without building anything, the [official app](https://github.com/ViscousPot/GitSync#readme) is available on the Play Store, App Store, F-Droid and IzzyOnDroid — note that it still has the premium tier this fork removes.
+
+You don't need a local toolchain to get an APK, though — the [**Build APK**](.github/workflows/build-apk.yml) GitHub Actions workflow builds one on every push to `main`, and can also be run on demand from this repo's Actions tab (`Run workflow`). Grab the signed APKs from the finished run's Artifacts section. It works with no configuration, though installs from consecutive runs won't be able to update over each other until you add `RELEASE_KEYSTORE_BASE64`, `RELEASE_SIGNING_ALIAS` and `RELEASE_SIGNING_PASSWORD` repo secrets — the same ones [`generate-apk-release.yml`](.github/workflows/generate-apk-release.yml) uses for tagged releases — at which point it signs with that key instead.
+
+To build locally instead:
 
 GitSync is a Flutter app with a Rust core (via [`flutter_rust_bridge`](https://github.com/fzyzcjy/flutter_rust_bridge)).
 
@@ -104,8 +98,8 @@ GitSync is a Flutter app with a Rust core (via [`flutter_rust_bridge`](https://g
 ### 2. Clone & install
 
 ```bash
-git clone https://github.com/ViscousPot/GitSync.git
-cd GitSync
+git clone https://github.com/shubham-sharma-1994/GitSync-Unlocked.git
+cd GitSync-Unlocked
 fvm flutter pub get
 ```
 
@@ -136,11 +130,11 @@ fvm flutter run
 
 ## Contributing
 
-Your support means a lot! If you find GitSync useful, please:
+This fork exists mainly for personal/self-built use, so contributions here are informal. If you find GitSync itself useful:
 
-- Star the repo to help others discover it
+- Star the [original repo](https://github.com/ViscousPot/GitSync) to help others discover it
 - Share it with friends or communities that might benefit
-- Consider becoming a [GitHub Sponsor](https://github.com/sponsors/ViscousPot)
+- Consider becoming a [GitHub Sponsor](https://github.com/sponsors/ViscousPot) of the original developer
 
 <br>
 At this time, code contributions aren’t needed anywhere in particular, but I’d love your help improving <strong><a href="#localization-contributions">localization</a></strong>
@@ -173,5 +167,6 @@ If you'd like to know what's still untranslated for a given locale, see [`untran
 
 ## Acknowledgements
 
+- [ViscousPot/GitSync](https://github.com/ViscousPot/GitSync) — the original app this fork is based on
 - [flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge)
 - [git2-rs](https://github.com/rust-lang/git2-rs)
